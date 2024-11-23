@@ -8,31 +8,25 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.net.URLDecoder;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
-import java.util.Optional;
-
-import static java.util.stream.Collectors.toList;
-
 @RestController
+@RequestMapping("/api/apt")
 @RequiredArgsConstructor
 public class AptController {
     private final AptService aptService;
 
-    @GetMapping("/api/apt")
+    @GetMapping
     public List<Apt> findAllApt(){
         return aptService.findAll();
     }
-    @GetMapping("/api/apt/{aptID}")
+    @GetMapping("/{aptID}")
     public ResponseEntity<AptResponse> findById(@PathVariable Integer aptID){
         AptResponse aptResponse =aptService.makeResponse(aptService.findById(aptID));
         if (aptResponse != null) return ResponseEntity.ok(aptResponse);
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
     }
 
-    @GetMapping("/api/apt/search")
+    @GetMapping("/search")
     public List<AptResponse> findByFilter(@RequestBody AptRequest aptRequest){
         List<Apt> al = aptService.findAll();
         al = al.stream()
