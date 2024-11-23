@@ -2,6 +2,8 @@ package danpoong.danpoong.Controller;
 
 import danpoong.danpoong.Domain.Company;
 import danpoong.danpoong.Service.CompanyService;
+import danpoong.danpoong.dto.CompanyRequest;
+import danpoong.danpoong.dto.CompanyResponse;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -20,7 +22,7 @@ public class CompanyController {
      * @return
      */
     @GetMapping
-    public List<Company> getAllCompanies() {
+    public List<CompanyResponse> getAllCompanies() {
         return companyService.getAllCompanies();
     }
 
@@ -31,23 +33,22 @@ public class CompanyController {
      * @return
      */
     @GetMapping("/{companyID}")
-    public Company getCompany(@PathVariable Integer companyID) {
+    public CompanyResponse getCompany(@PathVariable Integer companyID) {
         return companyService.getCompanyById(companyID);
     }
 
     /**
-     * 검색 기능 (위치, 형태, 업종)
-     * GET /api/company/search?keyword={keyword}
-     * @param location
-     * @param type
-     * @param category
+     * 동적 검색 기능 (위치, 형태, 업종)
+     * POST /api/company/search
+     * @param companyRequest
      * @return
      */
-    @GetMapping("/search")
-    public List<Company> searchCompanies(
-            @RequestParam(required = false) String location,
-            @RequestParam(required = false) String type,
-            @RequestParam(required = false) String category) {
-        return companyService.searchCompanies(location, type, category);
+    @PostMapping("/search")
+    public List<CompanyResponse> searchCompanies(@RequestBody CompanyRequest companyRequest) {
+        return companyService.searchCompanies(
+                companyRequest.getLocation(),
+                companyRequest.getType(),
+                companyRequest.getCategory()
+        );
     }
 }
