@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 public record CombinedResponse(
-        List<Apt> apt,         // Apt 객체(Optional로 감쌈)
-        List<Company> company  // Company 객체(Optional로 감쌈)
+        List<AptResponse> apt,         // Apt 객체(Optional로 감쌈)
+        List<CompanyResponse> company  // Company 객체(Optional로 감쌈)
 ) {
 }
