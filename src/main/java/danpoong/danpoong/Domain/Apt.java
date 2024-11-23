@@ -23,13 +23,13 @@ public class Apt {
     private String aptNm;       // 단지명
     private String jibun;       // 지번
     private String excluUseAr;  // 전용 면적
-    private String deposit;     // 보증금액
-    private String monthlyRent; // 월세금액
+    private Integer deposit;     // 보증금액
+    private Integer monthlyRent; // 월세금액
     private String contractType; // 계약구분
 
     // 생성자 추가, 객체 생성 시 필드 초기화
     public Apt(String umdNm, String aptNm, String jibun, String excluUseAr,
-               String deposit, String monthlyRent, String contractType) {
+               Integer deposit, Integer monthlyRent, String contractType) {
         this.umdNm = umdNm;
         this.aptNm = aptNm;
         this.jibun = jibun;
