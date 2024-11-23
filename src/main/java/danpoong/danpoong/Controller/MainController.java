@@ -19,7 +19,7 @@ public class MainController {
     private final CompanyController companyController;
 
     @GetMapping
-    public CombinedResponse findByLocation(){
+    public CombinedResponse findDefault(){
         List<Apt> al = aptService.findByUmdNm("백현동");
         List<Company> cl = companyController.getAllCompanies();
         // List<Company> cl = companyController.findByLocation("판교");
