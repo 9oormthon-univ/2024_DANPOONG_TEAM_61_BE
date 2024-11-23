@@ -14,8 +14,15 @@ public class CompanyService {
         this.companyRepository = companyRepository;
     }
 
+    // 모든 기업 데이터를 가져오는 메서드
     public List<Company> getAllCompanies() {
         return companyRepository.findAllWithDetails();
+    }
+
+    // 특정 기업 데이터를 가져오는 메서드
+    public Company getCompanyById(Integer companyID) {
+        return companyRepository.findByIdWithDetails(companyID)
+                .orElseThrow(() -> new RuntimeException("Company with ID " + companyID + " not found."));
     }
 
 }
