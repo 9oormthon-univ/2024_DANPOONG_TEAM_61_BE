@@ -2,6 +2,8 @@ package danpoong.danpoong.Service;
 
 import danpoong.danpoong.Domain.Company;
 import danpoong.danpoong.Repository.CompanyRepository;
+import org.springframework.data.jpa.domain.Specification;
+import danpoong.danpoong.Specification.CompanySpecification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,4 +27,11 @@ public class CompanyService {
                 .orElseThrow(() -> new RuntimeException("Company with ID " + companyID + " not found."));
     }
 
+    // 동적 검색 기능
+    public List<Company> searchCompanies(String location, String type, String category) {
+        Specification<Company> spec = Specification.where(CompanySpecification.hasLocation(location))
+                .and(CompanySpecification.hasType(type))
+                .and(CompanySpecification.hasCategory(category));
+        return companyRepository.findAll(spec);
+    }
 }
