@@ -1,5 +1,6 @@
 package danpoong.danpoong.Domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -20,6 +21,7 @@ public class Category {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "companyID")
+    @JsonBackReference
     private Company company;
 
     public Category(String category) {

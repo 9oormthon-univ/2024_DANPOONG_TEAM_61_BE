@@ -1,5 +1,6 @@
 package danpoong.danpoong.Domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -20,6 +21,7 @@ public class Location {
     @OneToOne
     @MapsId // companyID를 FK이자 PK로 사용
     @JoinColumn(name = "companyID")
+    @JsonBackReference
     private Company company;
 
     public Location(String location) {
