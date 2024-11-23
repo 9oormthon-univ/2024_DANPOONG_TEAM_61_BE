@@ -33,7 +33,7 @@ public class AptController {
     }
 
     @GetMapping("/api/apt/search")
-    public List<AptResponse> findByUmdNm(@RequestBody AptRequest aptRequest){
+    public List<AptResponse> findByFilter(@RequestBody AptRequest aptRequest){
         List<Apt> al = aptService.findAll();
         al = al.stream()
                 .filter(apt ->
