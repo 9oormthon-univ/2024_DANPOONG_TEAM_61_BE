@@ -22,7 +22,10 @@ public class Company {
     private Integer companyID;
 
     private String companyName;       // 기업 이름
+
     private String companyInfoPage;   // 기업 정보 페이지
+
+    private String detailLoc; // 상세 주소
 
     // 1:1 관계 - Location
     @OneToOne(mappedBy = "company", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -40,9 +43,10 @@ public class Company {
     private List<Category> categories = new ArrayList<>();
 
     // 생성자
-    public Company(String companyName, String companyInfoPage) {
+    public Company(String companyName, String companyInfoPage, String detailLoc) {
         this.companyName = companyName;
         this.companyInfoPage = companyInfoPage;
+        this.detailLoc = detailLoc;
     }
 
     // 연관 관계 메서드 (편의 메서드)

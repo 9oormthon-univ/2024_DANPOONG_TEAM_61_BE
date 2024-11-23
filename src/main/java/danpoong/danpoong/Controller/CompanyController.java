@@ -2,11 +2,7 @@ package danpoong.danpoong.Controller;
 
 import danpoong.danpoong.Domain.Company;
 import danpoong.danpoong.Service.CompanyService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
@@ -19,6 +15,7 @@ public class CompanyController {
     }
 
     /**
+     * 전체 기업 데이터 가져오기
      * GET /api/company
      * @return
      */
@@ -28,6 +25,7 @@ public class CompanyController {
     }
 
     /**
+     * 특정 기업 데이터 가져오기 (아이콘 클릭)
      * GET /api/company/{companyID}
      * @param companyID
      * @return
@@ -37,4 +35,19 @@ public class CompanyController {
         return companyService.getCompanyById(companyID);
     }
 
+    /**
+     * 검색 기능 (위치, 형태, 업종)
+     * GET /api/company/search?keyword={keyword}
+     * @param location
+     * @param type
+     * @param category
+     * @return
+     */
+    @GetMapping("/search")
+    public List<Company> searchCompanies(
+            @RequestParam(required = false) String location,
+            @RequestParam(required = false) String type,
+            @RequestParam(required = false) String category) {
+        return companyService.searchCompanies(location, type, category);
+    }
 }
